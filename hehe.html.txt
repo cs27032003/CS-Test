@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Granted</title>
+    <style>
+        body { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        #console { width: 80%; max-width: 600px; }
+        .cursor { display: inline-block; width: 10px; height: 20px; background: #00ff00; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        #heart-screen { display: none; text-align: center; color: #ff4d4d; animation: fadeIn 2s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        h1 { font-size: 3rem; margin: 0; }
+        p { color: #fff; font-size: 1.2rem; }
+        input { background: none; border: none; color: #00ff00; font-family: inherit; font-size: 1.2rem; outline: none; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <div id="console">
+        <div id="logs"></div>
+        <div id="input-line">
+            <span>> Enter Birthday Code: </span>
+            <input type="text" id="passcode" autofocus autocomplete="off">
+        </div>
+    </div>
+
+    <div id="heart-screen">
+        <h1>❤️ Happy Birthday, [Name]! ❤️</h1>
+        <p>System Overload: Too much love detected.</p>
+        <p style="color: #888;">I know I'm a dork, but I'm your dork.</p>
+        <div style="font-size: 50px;">🎂✨🎁</div>
+    </div>
+
+    <script>
+        const input = document.getElementById('passcode');
+        const logs = document.getElementById('logs');
+        const consoleDiv = document.getElementById('console');
+        const heartScreen = document.getElementById('heart-screen');
+
+        // Personalize this!
+        const correctCode = "love123"; 
+
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const val = input.value.toLowerCase();
+                if (val === correctCode) {
+                    executeSuccess();
+                } else {
+                    logs.innerHTML += `<div style="color: red;">> Access Denied. Try again.</div>`;
+                    input.value = "";
+                }
+            }
+        });
+
+        function executeSuccess() {
+            consoleDiv.style.display = "none";
+            heartScreen.style.display = "block";
+            document.body.style.background = "radial-gradient(circle, #2b0000 0%, #0a0a0a 100%)";
+            // Trigger confetti or any other JS library here if you want!
+        }
+    </script>
+</body>
+</html>
